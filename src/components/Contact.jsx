@@ -5,16 +5,52 @@ import { styles } from "../style";
 import { EarthCanvas } from "./canvas";
 import { SectionWrapper } from "./hoc";
 import { slideIn } from "../utils/motion";
+
 const Contact = () => {
   const formRef = useRef();
   const [form, setForm] = useState({
     name: "",
-    email: "",
+    Email: "",
     message: "",
   });
   const [loading, setLoading] = useState(false);
-  const handleChange = (e) => {};
-  const handleSubmit = (e) => {};
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setForm({ ...form, [name]: value });
+
+    console.log(name);
+  };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setLoading(e);
+    emailjs
+      .send(
+        "service_9ke9n66",
+        "template_1yubt0o",
+
+        {
+          from_name: form.name,
+          to_name: "noor",
+          from_email: form.email,
+          to_email: "barbieblus154@gmail.com",
+          message: form.message,
+        },
+        "-AKHxmDkCm0hU8pMl"
+      )
+      .then(() => {
+        setLoading(false);
+        alert("thank you");
+        setForm({
+          name: "",
+          email: "",
+          message: "",
+        });
+      }),
+      (error) => {
+        setLoading(false);
+        console.log(error);
+      };
+  };
   return (
     <div className="xl:mt-12 xl:flex-row flex-col-reverse flex gap-10 overflow-hidden">
       <motion.div

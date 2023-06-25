@@ -11,7 +11,6 @@ import { textVariant } from "../utils/motion";
 import Tech from "./Tech";
 
 const ExperienceCard = ({ experience }) => {
-  console.log(experience.points);
   return (
     <VerticalTimelineElement
       contentStyle={{
